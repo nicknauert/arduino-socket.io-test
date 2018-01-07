@@ -1,9 +1,9 @@
 const ledColorInput = document.querySelector('#ledColorInput');
+const slider = document.querySelector('#brightnessSlider');
 const buttons = document.querySelectorAll('button');
 
 const socket = io();
 
-ledColorInput.addEventListener('change', changeLedColor)
 
 buttons[0].addEventListener('click', (e) => {
   socket.emit('led1:toggle')
@@ -21,6 +21,9 @@ buttons[4].addEventListener('click', (e) => {
   socket.emit('leds:pulse')
 })
 
+slider.addEventListener('input', (e) => {
+  socket.emit('leds:brightness', e.target.value)
+})
 
 
 

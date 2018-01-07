@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 
 //////////////////////////////
 //     JOHNNY FIVE
+
 const board = new j5.Board();
 
 let led1, led2, led3, leds;
@@ -29,7 +30,6 @@ board.on('ready', function(){
 
 //////////////////////////////
 //     SOCKET.IO
-
 
 io.on('connection', function(client){
   console.log('client connection: ', client.id);
@@ -47,9 +47,9 @@ io.on('connection', function(client){
     leds.stop()
     leds.pulse({
       easing: "in-quad",
-      duration: 3000,
+      duration: 10000,
       cuePoints: [0, 1],
-      keyFrames: [0, 255],
+      keyFrames: [20, 255],
       metronomic: true,
       onstart: function(){
         console.log('animation stopped');
@@ -69,8 +69,6 @@ io.on('connection', function(client){
     leds.stop();
     led3.toggle()
   })
-  
-
 })
 
 const port = process.env.PORT || 3000;
